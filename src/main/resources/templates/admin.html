@@ -33,10 +33,10 @@
 
 <div class="control-group">
     <!-- Id -->
-    <label class="control-label" for="updateList">Name:</label>
+    <label class="control-label" for="search">Name:</label>
     <div class="controls">
-        <input type="text" id="updateList" name="updateList" value="" placeholder="" class="input-xlarge">
-        <button type="button" id="btnedit" class="btn btn-success">
+        <input type="text" id="search" name="search" value="" placeholder="" class="input-xlarge">
+        <button type="button" id="btnSearch" class="btn btn-success">
             search
         </button>
 
@@ -72,11 +72,15 @@
     $(document).ready(function() {
         loadUsers("");
     })
+    $('#btnSearch').on('click', function () {
+        $('#list_users').empty();
+        loadUsers('search/' + $('#search').val());
+    })
 
     function deluser(id) {
         $.ajax({
             type: "DELETE",
-            url: "/api/users",
+            url: "/api/users/"+id,
             success: function () {
                 $('#tr'+id).remove();
             },

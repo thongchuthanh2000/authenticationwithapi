@@ -22,12 +22,14 @@ public class ApiUserController {
     @Autowired
     private RoleService roleService;
 
-    @GetMapping("/users")
+    @GetMapping("/users/")
     public List<User> getAllUsers() {
-//        if (search.equals("")){
             return userService.getAll();
-//        }
-//        return userService.getByName(search);
+    }
+
+    @GetMapping("/users/search/{searchName}")
+    public List<User> getAllByUsers(@PathVariable(value = "searchName") String searchName) {
+        return userService.getByName(searchName);
     }
 
     @GetMapping("/users/{id}")
